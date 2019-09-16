@@ -4,7 +4,7 @@ import javax.ws.rs.core.*;
 
 import org.onosproject.rest.AbstractWebResource;
 
-@Path("/ChenPoTest")
+@Path("ChenPoTest")
 public class TestWebResource extends AbstractWebResource {
 
     @POST

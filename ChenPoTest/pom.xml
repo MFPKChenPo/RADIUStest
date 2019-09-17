@@ -110,7 +110,7 @@
 	        <groupId>com.hynnet</groupId>
 	        <artifactId>tinyradius</artifactId>
 	        <version>1.0.1</version>
-            <systemPath>/home/chendlink/test_app/ChenPoTest/tinyradius-1.1.0.jar</systemPath>
+            <systemPath>/home/win/RADIUStest/ChenPoTest/tinyradius-1.1.0.jar</systemPath>
             <scope>system</scope>
 	    </dependency>
     </dependencies>

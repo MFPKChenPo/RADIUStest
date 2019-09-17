@@ -32,8 +32,15 @@
         <onos.app.name>org.ChenPotest.app</onos.app.name>
         <onos.app.origin>TEST___</onos.app.origin>
         <onos.app.category>default</onos.app.category>
-        <onos.app.url>http://onosproject.org</onos.app.url>
-        <onos.app.readme>ONOS OSGi bundle archetype.</onos.app.readme>
+
+        <web.context>/testRadius</web.context>
+        <api.version>1.0.0</api.version>
+        <api.title>Sample Radius REST API</api.title>
+        <api.description>
+            Sample Radius REST API
+        </api.description>
+        <api.package>org.onosproject.MyTest</api.package>
+        
         <!-- Uncomment to generate ONOS app from this module.
         <onos.app.title>Foo App</onos.app.title>
         -->
@@ -110,8 +117,8 @@
         <dependency>
             <groupId>com.hynnet</groupId>
             <artifactId>tinyradius</artifactId>
-            <version>1.0.1</version>
-            <systemPath>/home/win/RADIUStest/ChenPoTest/tinyradius-1.1.0.jar</systemPath>
+            <version>1.1.0</version>
+            <systemPath>/home/aftance/RADIUStest/ChenPoTest/tinyradius-1.1.0.jar</systemPath>
             <scope>system</scope>
         </dependency>
         <dependency>
@@ -139,8 +146,14 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>ChenPoTest</Bundle-SymbolicName>
-                        <Import-Package>!org.tinyradius,*</Import-Package>
+                        <_wab>src/main/webapp/</_wab>
+                        <Bundle-SymbolicName>
+                            ${project.groupId}.${project.artifactId}
+                        </Bundle-SymbolicName>
+                        <Import-Package>
+                            !org.tinyradius,*,org.glassfish.jersey.servlet
+                        </Import-Package>
+                        <Web-ContextPath>${web.context}</Web-ContextPath>
                         <Embed-Dependency>tinyradius</Embed-Dependency>
                     </instructions>
                 </configuration>

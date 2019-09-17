@@ -14,7 +14,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.onosproject.MyTest</groupId>
@@ -28,11 +29,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <onos.version>2.1.0</onos.version>
-                <onos.app.name>org.ChenPotest.app</onos.app.name>
-                <onos.app.origin>TEST___</onos.app.origin>
-                <onos.app.category>default</onos.app.category>
-                <onos.app.url>http://onosproject.org</onos.app.url>
-                <onos.app.readme>ONOS OSGi bundle archetype.</onos.app.readme>
+        <onos.app.name>org.ChenPotest.app</onos.app.name>
+        <onos.app.origin>TEST___</onos.app.origin>
+        <onos.app.category>default</onos.app.category>
+        <onos.app.url>http://onosproject.org</onos.app.url>
+        <onos.app.readme>ONOS OSGi bundle archetype.</onos.app.readme>
         <!-- Uncomment to generate ONOS app from this module.
         <onos.app.title>Foo App</onos.app.title>
         -->
@@ -106,13 +107,28 @@
             <version>1.4.0</version>
             <scope>provided</scope>
         </dependency>
-	    <dependency>
-	        <groupId>com.hynnet</groupId>
-	        <artifactId>tinyradius</artifactId>
-	        <version>1.0.1</version>
+        <dependency>
+            <groupId>com.hynnet</groupId>
+            <artifactId>tinyradius</artifactId>
+            <version>1.0.1</version>
             <systemPath>/home/win/RADIUStest/ChenPoTest/tinyradius-1.1.0.jar</systemPath>
             <scope>system</scope>
-	    </dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.27</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.27</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>2.27</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

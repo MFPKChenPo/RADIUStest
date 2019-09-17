@@ -7,7 +7,7 @@ import org.onosproject.rest.AbstractWebResource;
 @Path("ChenPoTest")
 public class TestWebResource extends AbstractWebResource {
 
-    @POST
+    @GET
     @Path("/hello")
     public Response sayHI(@FormParam("user") String user, @FormParam("pass") String pass){
         String msg = "Hello";

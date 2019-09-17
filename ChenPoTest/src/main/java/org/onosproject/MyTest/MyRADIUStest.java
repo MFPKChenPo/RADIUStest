@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.util.Dictionary;
 import java.util.Properties;
 
-
 import static org.onlab.util.Tools.get;
 
 /**
@@ -55,7 +54,7 @@ public class MyRADIUStest {
 
     @Reference(cardinality = ReferenceCardinality.MANDATORY)
     protected CoreService coreService;
-    
+
     /** Some configurable property. */
     private String someProperty;
 
@@ -63,48 +62,46 @@ public class MyRADIUStest {
     protected ComponentConfigService cfgService;
 
     @Activate
-    protected void activate(){
-        //cfgService.registerProperties(getClass());
+    protected void activate() {
+        // cfgService.registerProperties(getClass());
         appId = coreService.registerApplication("org.onosproject.MyTest");
 
-        /*RESTful API passing User credential? */
+        /* RESTful API passing User credential? */
 
         create_RADClient();
-        create_request(); 
+        create_request();
 
         auth_with_RADIUS(ar);
 
         log.info("Started");
     }
 
-    public void auth_with_RADIUS(AccessRequest auth_ar){
+    public void auth_with_RADIUS(AccessRequest auth_ar) {
         log.info("Packet before it is sent\n" + auth_ar + "\n");
         RadiusPacket response = null;
         try {
             log.info("Packet to RADIUS server");
             response = rc.authenticate(auth_ar);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             log.info("Exeption from IO");
             e.printStackTrace();
-        }
-        catch (RadiusException e) {
+        } catch (RadiusException e) {
             log.info("Exception from RADIUS");
             e.printStackTrace();
         }
         log.info("Packet after it was sent\n" + auth_ar + "\n");
-        log.info("Response\n"+response.getPacketTypeName() + "\n");
+        log.info("Response\n" + response.getPacketTypeName() + "\n");
         rc.close();
 
     }
 
-    public void create_RADClient(){
+    public void create_RADClient() {
         rc = new RadiusClient(host, NASpassword);
         log.info("Radius Client created!!");
-        
+
     }
 
-    public void create_request(){
+    public void create_request() {
         ar = new AccessRequest(user, user_pass);
         log.info("Access Request created!!");
         ar.setAuthProtocol("pap");
@@ -113,10 +110,9 @@ public class MyRADIUStest {
         ar.addAttribute("Service-Type", "Login-User");
     }
 
-
     @Deactivate
     protected void deactivate() {
-        //cfgService.unregisterProperties(getClass(), false);
+        // cfgService.unregisterProperties(getClass(), false);
         log.info("Stopped");
     }
 
@@ -128,6 +124,5 @@ public class MyRADIUStest {
         }
         log.info("Reconfigured");
     }
-
 
 }

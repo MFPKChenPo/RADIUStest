@@ -42,6 +42,9 @@ import static org.onlab.util.Tools.get;
 @Component(immediate = true)
 public class MyRADIUStest {
 
+    public MyRADIUStest(){
+        rc = createRadiusClient();
+    }
     private final Logger log = LoggerFactory.getLogger(getClass());
     private ApplicationId appId;
 
@@ -68,19 +71,20 @@ public class MyRADIUStest {
 
         /* RESTful API passing User credential? */
 
-        create_RADClient();
-        create_request();
-
-        auth_with_RADIUS(ar);
+        rc = createRadiusClient();
+        ar = createRequest(user, user_pass);
+        authWithRadius(ar);
 
         log.info("Started");
     }
 
-    public void auth_with_RADIUS(AccessRequest auth_ar) {
+    public void authWithRadius(AccessRequest auth_ar) {
         log.info("Packet before it is sent\n" + auth_ar + "\n");
         RadiusPacket response = null;
         try {
             log.info("Packet to RADIUS server");
+            if(rc == null)
+                log.info("FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCK");
             response = rc.authenticate(auth_ar);
         } catch (IOException e) {
             log.info("Exeption from IO");
@@ -95,19 +99,19 @@ public class MyRADIUStest {
 
     }
 
-    public void create_RADClient() {
-        rc = new RadiusClient(host, NASpassword);
+    public RadiusClient createRadiusClient() {
         log.info("Radius Client created!!");
-
+        return new RadiusClient(host, NASpassword);
     }
 
-    public void create_request() {
-        ar = new AccessRequest(user, user_pass);
+    public AccessRequest createRequest(String myUser, String myPass) {
+        AccessRequest thisAr = new AccessRequest(myUser, myPass);
         log.info("Access Request created!!");
-        ar.setAuthProtocol("pap");
-        ar.addAttribute("NAS-Identifier", "My localhost NAS~");
-        ar.addAttribute("NAS-IP-Address", "127.0.1.1");
-        ar.addAttribute("Service-Type", "Login-User");
+        thisAr.setAuthProtocol("pap");
+        thisAr.addAttribute("NAS-Identifier", "My localhost NAS~");
+        thisAr.addAttribute("NAS-IP-Address", "127.0.1.1");
+        thisAr.addAttribute("Service-Type", "Login-User");
+        return thisAr;
     }
 
     @Deactivate

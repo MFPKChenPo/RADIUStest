@@ -4,6 +4,7 @@ import javax.ws.rs.core.*;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.onosproject.rest.AbstractWebResource;
+import org.tinyradius.packet.AccessRequest;
 
 @Path("ChenPoTest")
 public class TestWebResource extends AbstractWebResource {
@@ -14,14 +15,18 @@ public class TestWebResource extends AbstractWebResource {
      * @return 200 OK
      */
     @GET
-    @Path("")
     public Response hello() {
         ObjectNode node = mapper().createObjectNode().put("hello", "world");
         return ok(node).build();
     }
-
-    public Response sayHI(@FormParam("user") String user, @FormParam("pass") String pass){
-        String msg = "Hello";
-        return Response.ok(msg).build();
+    @POST
+    @Consumes("application/x-www-form-urlencoded")
+    public Response sayHI(@FormParam("user")String user,@FormParam("pass")String pass){
+        ObjectNode node = mapper().createObjectNode().put(user, pass);
+        MyRADIUStest newUser = new MyRADIUStest();
+        //newUser.createRadiusClient();
+        AccessRequest myAr = newUser.createRequest(user, pass);
+        newUser.authWithRadius(myAr);
+        return Response.ok(node).build();
     }
 }

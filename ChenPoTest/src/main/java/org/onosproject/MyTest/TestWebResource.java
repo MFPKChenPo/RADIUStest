@@ -22,11 +22,12 @@ public class TestWebResource extends AbstractWebResource {
     @POST
     @Consumes("application/x-www-form-urlencoded")
     public Response sayHI(@FormParam("user")String user,@FormParam("pass")String pass){
-        ObjectNode node = mapper().createObjectNode().put(user, pass);
         MyRADIUStest newUser = new MyRADIUStest();
         //newUser.createRadiusClient();
         AccessRequest myAr = newUser.createRequest(user, pass);
-        newUser.authWithRadius(myAr);
+        String result = newUser.authWithRadius(myAr);
+        ObjectNode node = mapper().createObjectNode().put("Authentication result", result);
+
         return Response.ok(node).build();
     }
 }

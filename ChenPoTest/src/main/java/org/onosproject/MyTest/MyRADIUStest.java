@@ -78,7 +78,7 @@ public class MyRADIUStest {
         log.info("Started");
     }
 
-    public void authWithRadius(AccessRequest auth_ar) {
+    public String authWithRadius(AccessRequest auth_ar) {
         log.info("Packet before it is sent\n" + auth_ar + "\n");
         RadiusPacket response = null;
         try {
@@ -96,7 +96,7 @@ public class MyRADIUStest {
         log.info("Packet after it was sent\n" + auth_ar + "\n");
         log.info("Response\n" + response.getPacketTypeName() + "\n");
         rc.close();
-
+        return response.getPacketTypeName();
     }
 
     public RadiusClient createRadiusClient() {
